@@ -168,7 +168,7 @@ class Scape extends React.Component {
           }}
           coordinates={{
             x: 0,
-            y: -this.props.cellSize,
+            y: -this.props.cellSize*1.5,
             z: 0,
           }}
           pallete={{
