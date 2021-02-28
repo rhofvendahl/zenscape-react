@@ -17,16 +17,6 @@ body {
   transform-style: preserve-3d;
 }
 
-.base .light {
-  background: #9e9c9c;
-}
-.base .medium {
-  background: #807f7e;
-}
-.base .dark {
-  background: #4f4e4e;
-}
-
 .stripe {
   position: absolute;
   height: 100%;

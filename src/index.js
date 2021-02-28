@@ -1,166 +1,6 @@
-import { render } from "ejs";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-
-// // class Square extends React.Component {
-// //   render() {
-// //     return (
-// //       <button className="square" onClick={function() { alert("click"); }}>
-// //         {this.props.value}
-// //       </button>
-// //     );
-// //   }
-// // }
-
-// // class Square extends React.Component {
-// //   render() {
-// //     return (
-// //       <button
-// //         className="square"
-// //         onClick={ () => this.props.onClick() }
-// //       >
-// //         {this.props.value}
-// //       </button>
-// //     );
-// //   }
-// // }
-
-
-// function Square(props) {
-//   return (
-//     <button
-//       className="square"
-//       onClick={props.onClick}
-//     >
-//       {props.value}
-//     </button>
-//   );
-// }
-
-// class Background extends React.Component {
-//   // constructor(props) {
-//   //   super(props);
-//   //   this.state = {
-//   //     squares: Array(0).fill(null),
-//   //     xIsNext: true,
-//   //   };
-//   // }
-
-//   renderSquare(i) {
-//     return (
-//       <Square 
-//         value={this.props.squares[i]}
-//         onClick={ () => this.props.onClick(i) }
-//       />
-//     );
-//   }
-
-//   render() {
-//     const winner = calculateWinner(this.props.squares);
-//     let status;
-//     if (winner) {
-//       status = "Winner: " + winner;
-//     } else {
-//       status = "Next player: " + (this.props.xIsNext ? "X" : "O");
-//     }
-
-//     return (
-//       <div>
-//         {/* <div className="status">{status}</div> */}
-//         <div className="board-row">
-//           {this.renderSquare(0)}
-//           {this.renderSquare(1)}
-//           {this.renderSquare(2)}
-//         </div>
-//         <div className="board-row">
-//           {this.renderSquare(3)}
-//           {this.renderSquare(4)}
-//           {this.renderSquare(5)}
-//         </div>
-//         <div className="board-row">
-//           {this.renderSquare(6)}
-//           {this.renderSquare(7)}
-//           {this.renderSquare(8)}
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-// class Game extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       history: [{
-//         squares: Array(0).fill(null),
-//       }],
-//       xIsNext: true,
-//     }
-//   }
-
-//   handleClick(i) {
-//     const history = this.state.history;
-//     const current = history[history.length - 1];
-//     const squares = current.squares.slice();
-//     if (calculateWinner(squares) || squares[i]) {
-//       return;
-//     }
-//     squares[i] = this.state.xIsNext ? "X" : "O";
-//     this.setState({
-//       history: history.concat([{
-//         squares: squares,
-//       }]),
-//       xIsNext: !this.state.xIsNext,
-//     });
-//   }
-
-//   render() {
-//     const history = this.state.history;
-//     const current = history[history.length - 1];
-//     const winner = calculateWinner(current.squares);
-//     let status;
-//     if (winner) {
-//       status = "Winner: " + winner;
-//     } else {
-//       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
-//     }
-//     return (
-//       <div className="game">
-//         <div className="game-board">
-//           <Board 
-//             squares={current.squares}
-//             onClick={ (i) => this.handleClick(i)}
-//           />
-//         </div>
-//         <div className="game-info">
-//           <div>{status}</div>
-//           <ol>{/* TODO */}</ol>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-// function calculateWinner(squares) {
-//   const lines = [
-//     [0, 1, 2],
-//     [3, 4, 5],
-//     [6, 7, 8],
-//     [0, 3, 6],
-//     [1, 4, 7],
-//     [2, 5, 8],
-//     [0, 4, 8],
-//     [2, 4, 6],
-//   ];
-//   for (let i = 0; i < lines.length; i++) {
-//     const [a, b, c] = lines[i];
-//     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-//       return squares[a];
-//     }
-//   }
-//   return null;
-// }
 
 function Background(props) {
   return (
@@ -171,14 +11,9 @@ function Background(props) {
   )
 }
 
-// function Face() {
-
-// }
-
 function Face(props) {
   const transformString = `translate3d(${props.translate.x}px, ${props.translate.y}px, ${props.translate.z}px)`
     + ` rotateX(${props.rotate.x}deg) rotateY(${props.rotate.y}deg) rotateZ(${props.rotate.z}deg)`;
-  console.log(transformString);
   return (
     <div
       className={`${props.shade} face object`}
@@ -188,6 +23,7 @@ function Face(props) {
         marginLeft: -props.width/2,
         marginTop: -props.height/2,
         transform: transformString,
+        backgroundColor: props.color,
       }}
     ></div>
   )
@@ -195,84 +31,108 @@ function Face(props) {
 
 // TODO refactor, keep it short and DRY
 function Box(props) {
-  // console.log(props.className, props.dimensions, props.coordinates);
   return (
-    <div className={`${props.className} box object`}>
+    <div
+      className={`${props.boxName} box object`}
+      onClick={props.handleClick}
+    >
       {/* comment faces to reduce latency */}
 
       {/* orthogonal to y axis (y points down) */}
       <Face
-        shade="light"
+        color={props.pallete.light}
         width={props.dimensions.x}
         height={props.dimensions.z}
         translate={{x: (props.coordinates.x+props.dimensions.x/2), y: -(props.coordinates.y+props.dimensions.y), z: (props.coordinates.z+props.dimensions.z/2)}}
         rotate={{x: 90, y: 0, z: 0}}
       />
-      <Face
-        shade="dark"
+      {/* <Face
+        color={props.pallete.dark}
         width={props.dimensions.x}
         height={props.dimensions.z}
         translate={{x: (props.coordinates.x+props.dimensions.x/2), y: -(props.coordinates.y), z: (props.coordinates.z+props.dimensions.z/2)}}
         rotate={{x: 90, y: 0, z: 0}}
-      />
+      /> */}
 
       {/* orthogonal to z axis (z points out at screen) */}
       <Face
-        shade="medium"
+        color={props.pallete.medium}
         width={props.dimensions.x}
         height={props.dimensions.y}
         translate={{x: (props.coordinates.x+props.dimensions.x/2), y: -(props.coordinates.y+props.dimensions.y/2), z: (props.coordinates.z+props.dimensions.z)}}
         rotate={{x: 0, y: 0, z: 0}}
       />
-      <Face
-        shade="medium"
+      {/* <Face
+        color={props.pallete.medium}
         width={props.dimensions.x}
         height={props.dimensions.y}
         translate={{x: (props.coordinates.x+props.dimensions.x/2), y: -(props.coordinates.y+props.dimensions.y/2), z: (props.coordinates.z)}}
         rotate={{x: 0, y: 0, z: 0}}
-      />
+      /> */}
 
       {/* orthogonal to x axis (x points to the right) */}
-      <Face
-        shade="light"
+      {/* <Face
+        color={props.pallete.light}
         width={props.dimensions.z}
         height={props.dimensions.y}
         translate={{x: (props.coordinates.x+props.dimensions.x), y: -(props.coordinates.y+props.dimensions.y/2), z: (props.coordinates.z+props.dimensions.z/2)}}
         rotate={{x: 0, y: 90, z: 0}}
-      />
-      <Face
-        shade="dark"
+      /> */}
+      {/* <Face
+        color={props.pallete.dark}
         width={props.dimensions.z}
         height={props.dimensions.y}
         translate={{x: (props.coordinates.x), y: -(props.coordinates.y+props.dimensions.y/2), z: (props.coordinates.z+props.dimensions.z/2)}}
         rotate={{x: 0, y: 90, z: 0}}
-      />
+      /> */}
     </div>
   )
 }
 
 class Scape extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      xCells: props.cellSize,
-      zCells: props.zCells,
-      cellSize: props.cellSize,
-      memory: props.memory,
-      map: new Array(this.props.xCells).fill(new Array(this.props.zCells).fill(0)),
-      clickLog: [],
-    }
+  getPallete(height) {
+    const snowLine = 3;
+    if (height <= .2*snowLine) { // water
+      return {
+        light: "#4081f2",
+        medium: "#346dc7",
+        dark: "#275799",
+      }
+    } else if (height <= .3*snowLine) { // sand
+      return {
+        light: "#FFF089",
+        medium: "#C1B367",
+        dark: "#817847",
+      }
+    } else if (height <= .6*snowLine) { // foliage
+      return {
+        light: "#2aa330",
+        medium: "#1f8c28",
+        dark: "#106e1f",
+      }
+    } else if (height <= snowLine) { // rock
+      return {
+        light: "#BEBEBE",
+        medium: "#8E8E8E",
+        dark: "#606060",
+      }
+    } else { // snow
+      return {
+        light: "#FFFFFF",
+        medium: "#BEBEBE",
+        dark: "#7F7F7F",
+      }
+    };
   }
 
   render() {
-    // console.log(this.state.map);
-    let cells = []
-    for (let x=0; x<this.state.map.length; x++) {
-      for (let z=0; z<this.state.map[0].length; z++) {
+    const cells = [];
+    for (let x=0; x<this.props.map.length; x++) {
+      for (let z=0; z<this.props.map[0].length; z++) {
         const boxName = x + "-" + z;
         cells.push(<Box
           key={boxName}
-          className={boxName}
+          boxName={boxName}
           dimensions={{
             x: this.props.cellSize,
             y: this.props.cellSize,
@@ -280,10 +140,12 @@ class Scape extends React.Component {
           }}
           coordinates={{
             x: x*this.props.cellSize,
-            y: this.state.map[x][z]*this.props.cellSize,
+            y: this.props.map[x][z]*this.props.cellSize,
             z: z*this.props.cellSize,
           }}
-        />)
+          handleClick={() => this.props.handleClick(boxName)}
+          pallete={this.getPallete(this.props.map[x][z])}
+        />);
       }
     }
 
@@ -291,24 +153,28 @@ class Scape extends React.Component {
       <div
         className="scape object"
         style={{
-          marginLeft: (-this.state.xCells*this.state.cellSize/2) + "px",
-          marginTop: (-this.state.zCells*this.state.cellSize/2) + "px",      
+          marginLeft: (-this.props.map.length*this.props.cellSize/2) + "px",
+          marginTop: (-this.props.map[0].length*this.props.cellSize/2) + "px",      
           transform: "rotateX(-27deg)"
         }}
       >
-        {/* LATER: wrap this in "cells" div */}
         {cells}
         <Box
           className="base"
           dimensions={{
-            x: this.state.map.length*this.props.cellSize,
+            x: this.props.map.length*this.props.cellSize,
             y: this.props.cellSize,
-            z: this.state.map[0].length*this.props.cellSize,
+            z: this.props.map[0].length*this.props.cellSize,
           }}
           coordinates={{
             x: 0,
             y: -this.props.cellSize,
             z: 0,
+          }}
+          pallete={{
+            light: "#9e9c9c",
+            medium: "#807f7e",
+            dark: "#4f4e4e",
           }}
         />
       </div>
@@ -316,14 +182,82 @@ class Scape extends React.Component {
   }
 }
 
-ReactDOM.render((
-  <React.Fragment>
-    <Background />
-    <Scape 
-      xCells={20}
-      zCells={20}
-      cellSize={20}
-      memory={5}
-    />
-  </React.Fragment>
-), document.getElementById("root"));
+class Manager extends React.Component {
+  constructor(props) {
+    super(props);
+    this.xCells = 20;
+    this.zCells = 20;
+    this.cellSize = 20;
+    this.state = {
+      clickLog: [
+        [5, 6, Date.now()],
+        [5, 6, Date.now()],
+        [14, 14, Date.now()+500],
+        [16, 4, Date.now()+1000],
+      ],
+      map: new Array(this.xCells).fill(0).map(() => new Array(this.zCells).fill(0)),
+    };
+    this.memory = 5;
+    this.updateTimer = undefined;
+    this.updateInterval = 100;
+  }
+
+  handleClick(boxName) {
+    const click = [
+      parseInt(boxName.split("-")),
+      parseInt(boxName.split("-")),
+      Date.now(),
+    ];
+    this.setState({
+      clickLog: this.state.clickLog.concat([click]),
+    });
+    console.log(this.state.clickLog);
+  }
+
+  updateMap() {
+    const map = new Array(this.xCells).fill(0).map(() => new Array(this.zCells).fill(0));
+    for (let x=0; x<map.length; x++) {
+      for (let z=0; z<map[0].length; z++) {
+        for (let i = 0; (i < this.memory) && (i < this.state.clickLog.length); i++) {
+          const click = this.state.clickLog[this.state.clickLog.length-1-i];
+          const seconds = (Date.now() - click[2])/1000;
+          const distance = Math.pow((Math.pow(x-click[0], 2)+Math.pow(z-click[1], 2)), 1/2);
+          if (Math.abs(distance/2 - seconds) < Math.PI) {
+            map[x][z] += (Math.cos(distance/2 - seconds) + 1)/2;
+          }
+        };
+      };
+    };
+    this.setState({
+      map: map,
+    });
+  }
+
+  componentDidMount() {
+    this.updateTimer = setInterval(()=>{
+      this.updateMap();
+    }, this.updateInterval);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.updateTimer);
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Background />
+        <Scape 
+          cellSize={this.cellSize}
+          handleClick={(boxName)=>this.handleClick(boxName)}
+          map={this.state.map}
+        />
+      </React.Fragment>
+    )
+  }
+}
+
+ReactDOM.render(
+  <Manager />,
+  document.getElementById("root")
+);
