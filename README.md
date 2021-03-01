@@ -24,6 +24,12 @@ yarn install
 yarn start
 ```
 
+## Additional Notes
+Inside index.js you will find references to "x", "y" and "z", which refer to the object coordinate system. As this project uses CSS transformations to construct the 3D landscape I have used the CSS coordinate convention, which is as follows:
+* X: Pointing downward along the screen.
+* Y: Pointing to the right.
+* Z: Pointing out at the user.
+
 ## License
 
 Copyright (c) 2021 Russell Hofvendahl

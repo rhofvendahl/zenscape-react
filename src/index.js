@@ -29,7 +29,6 @@ function Face(props) {
   )
 }
 
-// TODO refactor, keep it short and DRY
 function Box(props) {
   return (
     <div
