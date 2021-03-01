@@ -10,7 +10,7 @@ ZenScape is live at: https://zenscape.us
 ## Setup
 1. Clone this repo and navigate to the root directory.
 ```
-git clone https://github.com/rhofvendahl/movie_finder_api
+git clone https://github.com/rhofvendahl/zenscape-react
 cd movie_finder_api
 ```
 
