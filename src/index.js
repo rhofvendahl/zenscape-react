@@ -11,6 +11,7 @@ function Background(props) {
   )
 }
 
+// Constructs an object face.
 function Face(props) {
   const transformString = `translate3d(${props.translate.x}px, ${props.translate.y}px, ${props.translate.z}px)`
     + ` rotateX(${props.rotate.x}deg) rotateY(${props.rotate.y}deg) rotateZ(${props.rotate.z}deg)`;
@@ -29,14 +30,14 @@ function Face(props) {
   )
 }
 
+// Constructs a box object.
+// Some faces commented to reduce latency.
 function Box(props) {
   return (
     <div
       className={`${props.boxName} box object`}
       onClick={props.handleClick}
     >
-      {/* comment faces to reduce latency */}
-
       {/* orthogonal to y axis (y points down) */}
       <Face
         color={props.pallete.light}
@@ -88,6 +89,7 @@ function Box(props) {
   )
 }
 
+// Responsible for rendering landscape.
 class Scape extends React.Component {
   getPallete(height) {
     const snowLine = 3;
@@ -181,6 +183,7 @@ class Scape extends React.Component {
   }
 }
 
+// Responsible for landscape interactivity.
 class Manager extends React.Component {
   constructor(props) {
     super(props);
@@ -203,8 +206,8 @@ class Manager extends React.Component {
 
   handleClick(boxName) {
     const click = [
-      parseInt(boxName.split("-")),
-      parseInt(boxName.split("-")),
+      parseInt(boxName.split("-")[0]),
+      parseInt(boxName.split("-")[1]),
       Date.now(),
     ];
     this.setState({
@@ -244,19 +247,18 @@ class Manager extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <Background />
-        <Scape 
-          cellSize={this.cellSize}
-          handleClick={(boxName)=>this.handleClick(boxName)}
-          map={this.state.map}
-        />
-      </React.Fragment>
+      <Scape 
+        cellSize={this.cellSize}
+        handleClick={(boxName)=>this.handleClick(boxName)}
+        map={this.state.map}
+      />
     )
   }
 }
 
-ReactDOM.render(
-  <Manager />,
-  document.getElementById("root")
-);
+ReactDOM.render((
+  <React.Fragment>
+    <Background />
+    <Manager />,
+  </React.Fragment>
+), document.getElementById("root"));
