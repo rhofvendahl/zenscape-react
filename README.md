@@ -3,9 +3,9 @@
 #### By Russell Hofvendahl
 
 ## About
-A rippling interactive landscape.
+A rippling interactive landscape, built with React.
 
-This project is a React rewrite of: https://github.com/rhofvendahl/zenscape
+ZenScape is live at: https://zenscape.us
 
 ## Setup
 1. Clone this repo and navigate to the root directory.
