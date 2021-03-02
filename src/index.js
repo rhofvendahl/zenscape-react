@@ -216,7 +216,7 @@ class Manager extends React.Component {
     console.log(this.state.clickLog);
   }
 
-  // Calculates the desired heights for each cell.
+  // Calculates the desired height for each cell.
   // Each cell is calculated individually, based on its distance from the locations of recent clicks.
   updateMap() {
     const map = new Array(this.xCells).fill(0).map(() => new Array(this.zCells).fill(0));
@@ -230,8 +230,8 @@ class Manager extends React.Component {
           const distance = Math.pow((Math.pow(x-click[0], 2)+Math.pow(z-click[1], 2)), 1/2);
 
           // If the current click is both close enough and recent enough, add an amount to the cell's height
-          // corresponding to its position on a 2D cosine which started out centered on the clicked cell
-          // and has since moved toward (and past) the current cell.
+          // corresponding to its position on a 2D cosine curve which started out centered on the clicked
+          // cell and has since moved toward (and past) the current cell.
           if (Math.abs(distance/2 - seconds) < Math.PI) {
             map[x][z] += (Math.cos(distance/2 - seconds) + 1)/2;
           }
