@@ -11,7 +11,7 @@ function Background(props) {
   )
 }
 
-// Constructs an object face.
+// Constructs a box face.
 function Face(props) {
   const transformString = `translate3d(${props.translate.x}px, ${props.translate.y}px, ${props.translate.z}px)`
     + ` rotateX(${props.rotate.x}deg) rotateY(${props.rotate.y}deg) rotateZ(${props.rotate.z}deg)`;
@@ -216,14 +216,22 @@ class Manager extends React.Component {
     console.log(this.state.clickLog);
   }
 
+  // Calculates the desired heights for each cell.
+  // Each cell is calculated individually, based on its distance from the locations of recent clicks.
   updateMap() {
     const map = new Array(this.xCells).fill(0).map(() => new Array(this.zCells).fill(0));
     for (let x=0; x<map.length; x++) {
       for (let z=0; z<map[0].length; z++) {
+
+        // For each click, add to the current cell's height.
         for (let i = 0; (i < this.memory) && (i < this.state.clickLog.length); i++) {
           const click = this.state.clickLog[this.state.clickLog.length-1-i];
           const seconds = (Date.now() - click[2])/1000;
           const distance = Math.pow((Math.pow(x-click[0], 2)+Math.pow(z-click[1], 2)), 1/2);
+
+          // If the current click is both close enough and recent enough, add an amount to the cell's height
+          // acorresponding to its position on a 2D cosine which started out centered on the clicked cell
+          // and has since moved toward (and past) the clicked cell.
           if (Math.abs(distance/2 - seconds) < Math.PI) {
             map[x][z] += (Math.cos(distance/2 - seconds) + 1)/2;
           }
