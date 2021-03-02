@@ -184,7 +184,7 @@ class Scape extends React.Component {
 }
 
 // Responsible for landscape interactivity.
-class Manager extends React.Component {
+class ScapeManager extends React.Component {
   constructor(props) {
     super(props);
     this.xCells = 20;
@@ -199,7 +199,7 @@ class Manager extends React.Component {
       ],
       map: new Array(this.xCells).fill(0).map(() => new Array(this.zCells).fill(0)),
     };
-    this.memory = 5;
+    this.clickMemory = 5;
     this.updateTimer = undefined;
     this.updateInterval = 100;
   }
@@ -224,7 +224,7 @@ class Manager extends React.Component {
       for (let z=0; z<map[0].length; z++) {
 
         // For each click, add to the current cell's height.
-        for (let i = 0; (i < this.memory) && (i < this.state.clickLog.length); i++) {
+        for (let i = 0; (i < this.clickMemory) && (i < this.state.clickLog.length); i++) {
           const click = this.state.clickLog[this.state.clickLog.length-1-i];
           const seconds = (Date.now() - click[2])/1000;
           const distance = Math.pow((Math.pow(x-click[0], 2)+Math.pow(z-click[1], 2)), 1/2);
@@ -267,6 +267,6 @@ class Manager extends React.Component {
 ReactDOM.render((
   <React.Fragment>
     <Background />
-    <Manager />,
+    <ScapeManager />,
   </React.Fragment>
 ), document.getElementById("root"));
