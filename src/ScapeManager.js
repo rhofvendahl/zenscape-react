@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Scape from "./Scape";
 
 const INIT = {
   X_CELLS: 20,
   Z_CELLS: 20,
   CELL_SIZE: 20,
-  CLICK_MEMORY: 20,
+  CLICK_MEMORY: 5,
   UPDATE_INTERVAL: 100,
 }
 
@@ -23,12 +23,14 @@ function ScapeManager(props) {
   );
 
   function handleClick(boxName) {
+    console.log('handling click')
     const click = [
       parseInt(boxName.split("-")[0]),
       parseInt(boxName.split("-")[1]),
       Date.now(),
     ];
     setClickLog(clickLog.concat([click]));
+    // console.log(clickLog);
   }
 
   // Calculates the desired height for each cell.
@@ -56,12 +58,18 @@ function ScapeManager(props) {
     setScapeMap(scapeMap);
   }
 
+  const savedUpdateMap = useRef();
+
   useEffect(() => {
-    console.log('setting')
+    savedUpdateMap.current = updateMap;
+  }, [updateMap]);
+
+  useEffect(() => {
+    console.log('setting');
     const updateTimer = setInterval(() => {
-      updateMap();
+      savedUpdateMap.current();
     }, INIT.UPDATE_INTERVAL);
-    return () => {
+      return () => {
       console.log('clearing');
       clearInterval(updateTimer);
     };
