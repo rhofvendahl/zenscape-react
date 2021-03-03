@@ -50,7 +50,7 @@ function getPallete(height) {
 }
 
 // Responsible for rendering landscape.
-function Scape(props) {
+const Scape = (props) => {
   const cells = [];
   for (let x = 0; x < props.scapeMap.length; x++) {
     for (let z = 0; z < props.scapeMap[0].length; z++) {

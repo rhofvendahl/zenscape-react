@@ -9,8 +9,10 @@ const INIT = {
   UPDATE_INTERVAL: 100,
 }
 
+console.log('this outside', this);
+
 // Responsible for landscape interactivity.
-function ScapeManager(props) {
+const ScapeManager = (props) => {
   const [clickLog, setClickLog] = useState([
     [5, 6, Date.now()],
     [5, 6, Date.now()],
@@ -18,12 +20,11 @@ function ScapeManager(props) {
     [16, 4, Date.now() + 1000],
   ]);
 
-  const [ scapeMap, setScapeMap ] = useState(
+  const [scapeMap, setScapeMap] = useState(
     new Array(INIT.X_CELLS).fill(0).map(() => new Array(INIT.Z_CELLS).fill(0))
   );
 
-  function handleClick(boxName) {
-    console.log('handling click')
+  const handleClick = (boxName) => {
     const click = [
       parseInt(boxName.split("-")[0]),
       parseInt(boxName.split("-")[1]),
@@ -35,7 +36,7 @@ function ScapeManager(props) {
 
   // Calculates the desired height for each cell.
   // Each cell is calculated individually, based on its distance from the locations of recent clicks.
-  function updateMap() {
+  const updateMap = () => {
     const scapeMap = new Array(INIT.X_CELLS).fill(0).map(() => new Array(INIT.Z_CELLS).fill(0));
     for (let x = 0; x < scapeMap.length; x++) {
       for (let z = 0; z < scapeMap[0].length; z++) {
@@ -69,7 +70,7 @@ function ScapeManager(props) {
     const updateTimer = setInterval(() => {
       savedUpdateMap.current();
     }, INIT.UPDATE_INTERVAL);
-      return () => {
+    return () => {
       console.log('clearing');
       clearInterval(updateTimer);
     };
