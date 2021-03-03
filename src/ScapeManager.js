@@ -10,7 +10,7 @@ const INIT = {
 }
 
 // Responsible for landscape interactivity.
-const ScapeManager = (props) => {
+const ScapeManager = () => {
   const [clickLog, setClickLog] = useState([
     [5, 6, Date.now()],
     [5, 6, Date.now()],

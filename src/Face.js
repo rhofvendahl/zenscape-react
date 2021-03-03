@@ -1,18 +1,19 @@
 
 // Constructs a box face.
-const Face = (props) => {
-  const transformString = `translate3d(${props.translate.x}px, ${props.translate.y}px, ${props.translate.z}px)`
-    + ` rotateX(${props.rotate.x}deg) rotateY(${props.rotate.y}deg) rotateZ(${props.rotate.z}deg)`;
+const Face = ({translate, rotate, width, height, backgroundColor}) => {
+  const transform = `translate3d(${translate.x}px, ${translate.y}px, ${translate.z}px)`
+    + ` rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) rotateZ(${rotate.z}deg)`;
+
   return (
     <div
-      className={`${props.shade} face object`}
+      className="face object"
       style={{
-        width: props.width,
-        height: props.height,
-        marginLeft: -props.width / 2,
-        marginTop: -props.height / 2,
-        transform: transformString,
-        backgroundColor: props.color,
+        width,
+        height,
+        marginLeft: -width/2,
+        marginTop: -height/2,
+        transform,
+        backgroundColor,
       }}
     ></div>
   )

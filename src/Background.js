@@ -1,5 +1,5 @@
 // Renders background.
-const Background = (props) => {
+const Background = () => {
   return (
     <div className="stripe">
       <div className="logo">ZS</div>

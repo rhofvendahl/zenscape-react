@@ -50,26 +50,27 @@ function getPallete(height) {
 }
 
 // Responsible for rendering landscape.
-const Scape = (props) => {
+// const Scape = (props) => {
+const Scape = ({scapeMap, cellSize, handleClick}) => {
   const cells = [];
-  for (let x = 0; x < props.scapeMap.length; x++) {
-    for (let z = 0; z < props.scapeMap[0].length; z++) {
+  for (let x = 0; x < scapeMap.length; x++) {
+    for (let z = 0; z < scapeMap[0].length; z++) {
       const boxName = x + "-" + z;
       cells.push(<Box
         key={boxName}
         boxName={boxName}
         dimensions={{
-          x: props.cellSize,
-          y: props.cellSize,
-          z: props.cellSize,
+          x: cellSize,
+          y: cellSize,
+          z: cellSize,
         }}
         coordinates={{
-          x: x * props.cellSize,
-          y: props.scapeMap[x][z] * props.cellSize,
-          z: z * props.cellSize,
+          x: x * cellSize,
+          y: scapeMap[x][z] * cellSize,
+          z: z * cellSize,
         }}
-        handleClick={() => props.handleClick(boxName)}
-        pallete={getPallete(props.scapeMap[x][z])}
+        handleClick={() => handleClick(boxName)}
+        pallete={getPallete(scapeMap[x][z])}
       />);
     }
   }
@@ -78,22 +79,22 @@ const Scape = (props) => {
     <div
       className="scape object"
       style={{
-        marginLeft: (-props.scapeMap.length * props.cellSize / 2) + "px",
-        marginTop: (-props.scapeMap[0].length * props.cellSize / 2) + "px",
-        transform: "rotateX(-27deg)"
+        marginLeft: (-scapeMap.length * cellSize / 2) + "px",
+        marginTop: (-scapeMap[0].length * cellSize / 2) + "px",
+        transform: "rotateX(-27deg)",
       }}
     >
       {cells}
       <Box
         className="base"
         dimensions={{
-          x: props.scapeMap.length * props.cellSize,
-          y: props.cellSize,
-          z: props.scapeMap[0].length * props.cellSize,
+          x: scapeMap.length * cellSize,
+          y: cellSize,
+          z: scapeMap[0].length * cellSize,
         }}
         coordinates={{
           x: 0,
-          y: -props.cellSize * 1.5,
+          y: -cellSize * 1.5,
           z: 0,
         }}
         pallete={PALLETES.BASE}
