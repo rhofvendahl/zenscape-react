@@ -5,8 +5,8 @@ import ScapeManager from "./ScapeManager";
 import "./index.css";
 
 ReactDOM.render((
-  <React.Fragment>
+  <React.StrictMode>
     <Background />
     <ScapeManager />,
-  </React.Fragment>
+  </React.StrictMode>
 ), document.getElementById("root"));
