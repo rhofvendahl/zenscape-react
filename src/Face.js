@@ -16,7 +16,7 @@ const Face = ({translate, rotate, width, height, backgroundColor}) => {
         backgroundColor,
       }}
     ></div>
-  )
-}
+  );
+};
 
 export default Face;

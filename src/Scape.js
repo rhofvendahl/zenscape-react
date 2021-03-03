@@ -34,7 +34,7 @@ const PALLETES = {
   },
 };
 
-function getPallete(height) {
+const getPallete = (height) => {
   const snowLine = 3;
   if (height <= .2 * snowLine) {
     return PALLETES.WATER
@@ -47,7 +47,7 @@ function getPallete(height) {
   } else {
     return PALLETES.SNOW
   };
-}
+};
 
 // Responsible for rendering landscape.
 // const Scape = (props) => {
@@ -100,7 +100,7 @@ const Scape = ({scapeMap, cellSize, handleClick}) => {
         pallete={PALLETES.BASE}
       />
     </div>
-  )
-}
+  );
+};
 
 export default Scape;

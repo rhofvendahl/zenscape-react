@@ -2,7 +2,6 @@ import Face from "./Face";
 
 // Constructs a box object.
 const Box = ({boxName, handleClick, pallete, dimensions, coordinates}) => {
-
   return (
     <div
       className={`${boxName} box object`}
@@ -26,7 +25,7 @@ const Box = ({boxName, handleClick, pallete, dimensions, coordinates}) => {
         rotate={{ x: 0, y: 0, z: 0 }}
       />
     </div>
-  )
-}
+  );
+};
 
 export default Box;

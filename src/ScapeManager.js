@@ -82,7 +82,7 @@ const ScapeManager = () => {
       handleClick={(boxName) => handleClick(boxName)}
       scapeMap={scapeMap}
     />
-  )
-}
+  );
+};
 
 export default ScapeManager;

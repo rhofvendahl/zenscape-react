@@ -5,7 +5,7 @@ const Background = () => {
       <div className="logo">ZS</div>
       <div className="guide">[click]</div>
     </div>
-  )
-}
+  );
+};
 
 export default Background;
