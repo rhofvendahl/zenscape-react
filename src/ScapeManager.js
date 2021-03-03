@@ -33,6 +33,7 @@ const ScapeManager = (props) => {
 
   // Calculates the desired height for each cell.
   // Each cell is calculated individually, based on its distance from the locations of recent clicks.
+  // useCallback is used to return a memoized function, as updateScapeMap would otherwise re-calculate each render cycle.
   const updateScapeMap = useCallback(() => {
     const newScapeMap = new Array(INIT.X_CELLS).fill(0).map(() => new Array(INIT.Z_CELLS).fill(0));
     for (let x = 0; x < newScapeMap.length; x++) {
@@ -56,15 +57,19 @@ const ScapeManager = (props) => {
     setScapeMap(newScapeMap);
   }, [clickLog]);
 
-  const savedUpdateScapeMap = useRef(updateScapeMap);
 
+  // Create a reference to updateScapeMap that can be used within setInterval.
+  const updateScapeMapRef = useRef(updateScapeMap);
+
+  // Update this reference each time updateScapeMap changes.
   useEffect(() => {
-    savedUpdateScapeMap.current = updateScapeMap;
+    updateScapeMapRef.current = updateScapeMap;
   }, [updateScapeMap]);
 
+  // Create an update loop at the start of this component's lifecycle.
   useEffect(() => {
     const updateTimer = setInterval(() => {
-      savedUpdateScapeMap.current();
+      updateScapeMapRef.current();
     }, INIT.UPDATE_INTERVAL);
     return () => {
       clearInterval(updateTimer);
