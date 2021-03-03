@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Scape from "./Scape";
 
 const INIT = {
@@ -8,8 +8,6 @@ const INIT = {
   CLICK_MEMORY: 5,
   UPDATE_INTERVAL: 100,
 }
-
-console.log('this outside', this);
 
 // Responsible for landscape interactivity.
 const ScapeManager = (props) => {
@@ -31,15 +29,14 @@ const ScapeManager = (props) => {
       Date.now(),
     ];
     setClickLog(clickLog.concat([click]));
-    // console.log(clickLog);
   }
 
   // Calculates the desired height for each cell.
   // Each cell is calculated individually, based on its distance from the locations of recent clicks.
-  const updateMap = () => {
-    const scapeMap = new Array(INIT.X_CELLS).fill(0).map(() => new Array(INIT.Z_CELLS).fill(0));
-    for (let x = 0; x < scapeMap.length; x++) {
-      for (let z = 0; z < scapeMap[0].length; z++) {
+  const updateScapeMap = useCallback(() => {
+    const newScapeMap = new Array(INIT.X_CELLS).fill(0).map(() => new Array(INIT.Z_CELLS).fill(0));
+    for (let x = 0; x < newScapeMap.length; x++) {
+      for (let z = 0; z < newScapeMap[0].length; z++) {
 
         // For each click, add to the current cell's height.
         for (let i = 0; (i < INIT.CLICK_MEMORY) && (i < clickLog.length); i++) {
@@ -51,27 +48,25 @@ const ScapeManager = (props) => {
           // corresponding to its position on a 2D cosine curve which started out centered on the clicked
           // cell and has since moved toward (and past) the current cell.
           if (Math.abs(distance / 2 - seconds) < Math.PI) {
-            scapeMap[x][z] += (Math.cos(distance / 2 - seconds) + 1) / 2;
+            newScapeMap[x][z] += (Math.cos(distance / 2 - seconds) + 1) / 2;
           }
         };
       };
     };
-    setScapeMap(scapeMap);
-  }
+    setScapeMap(newScapeMap);
+  }, [clickLog]);
 
-  const savedUpdateMap = useRef();
-
-  useEffect(() => {
-    savedUpdateMap.current = updateMap;
-  }, [updateMap]);
+  const savedUpdateScapeMap = useRef(updateScapeMap);
 
   useEffect(() => {
-    console.log('setting');
+    savedUpdateScapeMap.current = updateScapeMap;
+  }, [updateScapeMap]);
+
+  useEffect(() => {
     const updateTimer = setInterval(() => {
-      savedUpdateMap.current();
+      savedUpdateScapeMap.current();
     }, INIT.UPDATE_INTERVAL);
     return () => {
-      console.log('clearing');
       clearInterval(updateTimer);
     };
   }, []);
