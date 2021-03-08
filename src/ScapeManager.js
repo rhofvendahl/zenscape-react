@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import Scape from "./Scape";
+// import background from ""
 
 const INIT = {
   X_CELLS: 20,
@@ -77,12 +78,26 @@ const ScapeManager = () => {
   }, []);
 
   return (
-    <Scape
-      cellSize={INIT.CELL_SIZE}
-      handleClick={(boxName) => handleClick(boxName)}
-      scapeMap={scapeMap}
-    />
+    <div className="scape-manager" >
+      <Scape
+        cellSize={INIT.CELL_SIZE}
+        handleClick={(boxName) => handleClick(boxName)}
+        scapeMap={scapeMap}
+      />
+    </div>
   );
 };
 
 export default ScapeManager;
+
+
+// CONTROLS
+  // x cells
+  // y cells
+  // memory
+  // speed
+  // cellsize
+  // scape orientation
+  // wave speed
+  // wave height
+  // wave spread

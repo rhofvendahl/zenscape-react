@@ -1,12 +1,8 @@
-import React from "react";
 import ReactDOM from "react-dom";
-import Background from "./Background";
-import ScapeManager from "./ScapeManager";
+import App from "./App";
 import "./index.css";
 
 ReactDOM.render((
-  <React.StrictMode>
-    <Background />
-    <ScapeManager />,
-  </React.StrictMode>
+  <App />
 ), document.getElementById("root"));
+

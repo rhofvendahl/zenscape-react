@@ -82,6 +82,7 @@ const Scape = ({scapeMap, cellSize, handleClick}) => {
         marginLeft: (-scapeMap.length * cellSize / 2) + "px",
         marginTop: (-scapeMap[0].length * cellSize / 2) + "px",
         transform: "rotateX(-27deg)",
+        top: "55%",
       }}
     >
       {cells}
