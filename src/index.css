@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
 
-
 html, body {
   height: 100%
 }
@@ -10,14 +9,15 @@ body {
   margin: 0;
 }
 
-#root {
+.root {
   height: 100%;
 }
 
 .app {
+  position: absolute;
   display: flex;
   height: 100%;
-  /* flex-direction: row; */
+  width: 100%;
 }
 
 .object {
@@ -27,70 +27,54 @@ body {
   transform-style: preserve-3d;
 }
 
-.sidebar {
-  perspective: 100rem;
-  perspective-origin: 50vw 50vh;
-  /* position: absolute; */
-  position: relative;
+.viewport {
+  display: relative;
+  flex: 1;
   height: 100%;
-  width: 13rem;
-  /* margin-left: 15%; */
-  background: #C7C3C0;
-  font-family: 'Macondo', cursive;
-  color: white;
-  z-index: 9999999;
-  /* border-right: .5rem solid #C7C3C0; */
-  /* border-right: .2rem solid black; */
 }
 
-.sidebar-side {
-  background-color: #BCB7B3;
-  position: absolute;
-  width: 2rem;
+.controls {
+  /* width: 20rem; */
+  background-color: #C7C3C0;
   height: 100%;
+  z-index: 1;
+  display: none;
+}
+
+.stripe {
+  position: absolute;
+  height: 100%;
+  width: 12rem;
+  margin-left: 15vw;
+  background: #DBD7D3;
+  font-family: 'Macondo', cursive;
+  color: white;
+  text-align: center;
 }
 
 .logo {
-  position: relative;
-  margin-top: 5rem;
-  height: 9rem;
-  background: #DBD7D3;
+  margin-top: 10vh;
+  background: #C7C3C0;
   text-align: center;
-  font-size: 7rem;
-  line-height: 9.5rem;
-  transform-style: preserve-3d;
-  z-index: 10000;
+  font-size: 6rem;
+  padding-top: .5rem;
 }
 
-.logo-side-wrapper, .sidebar-side-wrapper {
-  position: absolute;
-  left: 100%;
-  top: 0;
-  height: 100%;
-  transform: rotateY(90deg);
-  transform-style: preserve-3d;
-}
-
-.logo-side {
-  background-color: #C8C2BC;
-  position: absolute;
-  width: 2rem;
-  height: 100%;
-}
-
-.menu * {
+.controls-toggle {
   margin-top: .5rem;
-  margin-left: 1rem;
-  font-size: 2.6rem;
+  font-size: 2.3rem;
 }
 
 .scape-manager {
   position: relative;
-  perspective: 38rem;
-  /* perspective-origin: 50vw 40vh; */
-  /* height: 100%; */
-  /* top: 10vh; */
-  margin-top: 15vh;
-  flex: 1;
-  /* height: 0; */
+  /* height: 50vh; */
+  /* padding-top: 100vh; */
+  height: 0;
+  margin-top: 60vh;
+  width: 100%;
+  /* padding-top: 100vh; */
+  /* margin-top: 10vh; */
+  perspective: 40rem;
+  /* perspective-origin: 50% 50%; */
+  transform-style: preserve-3d;
 }
