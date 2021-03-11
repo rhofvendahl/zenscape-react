@@ -5,7 +5,7 @@ const Box = ({boxName, handleClick, pallete, dimensions, coordinates}) => {
   return (
     <div
       className={`${boxName} box object`}
-      onClick={handleClick}
+      onMouseDown={handleClick}
     >
       {/* orthogonal to y axis (y points down) */}
       <Face

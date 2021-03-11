@@ -1,17 +1,9 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import Scape from "./Scape";
-// import background from ""
-
-const INIT = {
-  X_CELLS: 20,
-  Z_CELLS: 20,
-  CELL_SIZE: 20,
-  CLICK_MEMORY: 5,
-  UPDATE_INTERVAL: 100,
-}
+import "./ScapeManager.css";
 
 // Responsible for landscape interactivity.
-const ScapeManager = () => {
+const ScapeManager = ({xCells, zCells, cellSize, clickMemory, updateInterval, wave }) => {
   const [clickLog, setClickLog] = useState([
     [5, 6, Date.now()],
     [5, 6, Date.now()],
@@ -20,7 +12,7 @@ const ScapeManager = () => {
   ]);
 
   const [scapeMap, setScapeMap] = useState(
-    new Array(INIT.X_CELLS).fill(0).map(() => new Array(INIT.Z_CELLS).fill(0))
+    new Array(xCells).fill(0).map(() => new Array(zCells).fill(0))
   );
 
   const handleClick = (boxName) => {
@@ -36,12 +28,12 @@ const ScapeManager = () => {
   // Each cell is calculated individually, based on its distance from the locations of recent clicks.
   // useCallback is used to return a memoized function, as updateScapeMap would otherwise re-calculate each render cycle.
   const updateScapeMap = useCallback(() => {
-    const newScapeMap = new Array(INIT.X_CELLS).fill(0).map(() => new Array(INIT.Z_CELLS).fill(0));
+    const newScapeMap = new Array(xCells).fill(0).map(() => new Array(zCells).fill(0));
     for (let x = 0; x < newScapeMap.length; x++) {
       for (let z = 0; z < newScapeMap[0].length; z++) {
 
         // For each click, add to the current cell's height.
-        for (let i = 0; (i < INIT.CLICK_MEMORY) && (i < clickLog.length); i++) {
+        for (let i = 0; (i < clickMemory) && (i < clickLog.length); i++) {
           const click = clickLog[clickLog.length - 1 - i];
           const seconds = (Date.now() - click[2]) / 1000;
           const distance = Math.pow((Math.pow(x - click[0], 2) + Math.pow(z - click[1], 2)), 1 / 2);
@@ -49,38 +41,39 @@ const ScapeManager = () => {
           // If the current click is both close enough and recent enough, add an amount to the cell's height
           // corresponding to its position on a 2D cosine curve which started out centered on the clicked
           // cell and has since moved toward (and past) the current cell.
-          if (Math.abs(distance / 2 - seconds) < Math.PI) {
-            newScapeMap[x][z] += (Math.cos(distance / 2 - seconds) + 1) / 2;
+          const distanceFromPeak = Math.abs(distance / 2 - (seconds * wave.speed)) / wave.width;
+          if (distanceFromPeak < Math.PI) {
+            newScapeMap[x][z] += (Math.cos(distanceFromPeak) + 1) / 2 * wave.height;
           }
         };
       };
     };
     setScapeMap(newScapeMap);
-  }, [clickLog]);
-
+  }, [clickMemory, clickLog, xCells, zCells, wave]);
 
   // Create a reference to updateScapeMap that can be used within setInterval.
   const updateScapeMapRef = useRef(updateScapeMap);
 
-  // Update this reference each time updateScapeMap changes.
+  // Update this reference each time updateScapeMap or changes.
   useEffect(() => {
     updateScapeMapRef.current = updateScapeMap;
-  }, [updateScapeMap]);
+  }, [updateScapeMap, xCells, zCells]);
 
   // Create an update loop at the start of this component's lifecycle.
   useEffect(() => {
     const updateTimer = setInterval(() => {
       updateScapeMapRef.current();
-    }, INIT.UPDATE_INTERVAL);
+    }, updateInterval);
     return () => {
       clearInterval(updateTimer);
     };
-  }, []);
+  }, [updateInterval]);
+
 
   return (
     <div className="scape-manager" >
       <Scape
-        cellSize={INIT.CELL_SIZE}
+        cellSize={cellSize}
         handleClick={(boxName) => handleClick(boxName)}
         scapeMap={scapeMap}
       />
@@ -89,15 +82,3 @@ const ScapeManager = () => {
 };
 
 export default ScapeManager;
-
-
-// CONTROLS
-  // x cells
-  // y cells
-  // memory
-  // speed
-  // cellsize
-  // scape orientation
-  // wave speed
-  // wave height
-  // wave spread

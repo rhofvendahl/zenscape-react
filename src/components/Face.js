@@ -1,4 +1,3 @@
-
 // Constructs a box face.
 const Face = ({translate, rotate, width, height, backgroundColor}) => {
   const transform = `translate3d(${translate.x}px, ${translate.y}px, ${translate.z}px)`

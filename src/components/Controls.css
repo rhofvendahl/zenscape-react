@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+
+.controls {
+  position: relative;
+  /* background-color: #C7C3C0; */
+  background-color: #C3C3C3;
+  height: 100%;
+  -webkit-animation: showControls 1s forwards;
+  animation: showControls 1s forwards;
+  z-index: 1;
+  width: 25%;
+}
+
+.controls-initial {
+  margin-right: 0;
+  -webkit-animation: none;
+  animation: none;
+}
+
+.controls-hidden {
+  -webkit-animation: hideControls 1s forwards;
+  animation: hideControls 1s forwards;
+}
+
+.controls-removed {
+  display: none;
+}
+
+@-webkit-keyframes showControls {
+  from {margin-right: -25%;}
+  to {margin-right: 0;}
+}
+
+@keyframes showControls {
+  from {margin-right: -25%;}
+  to {margin-right: 0;}
+}
+
+@-webkit-keyframes hideControls {
+  from {margin-right: 0;}
+  to {margin-right: -25%;}
+}
+
+@keyframes hideControls {
+  from {margin-right: 0;}
+  to {margin-right: -25%;}
+}
+
+.controls-contents {
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.control {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-top: 5rem;
+}
+
+.control-size {
+  margin-top: 0;
+}
+
+.control-label {
+  text-align: center;
+  font-size: 1.75rem;
+  font-family: "Macondo", cursive;
+  color: white;
+  margin-bottom: .75rem;
+}
+
+.controls-reset {
+  text-align: center;
+  font-size: 1.75rem;
+  font-family: "Macondo", cursive;
+  color: white;
+  margin-top: 5rem;
+  cursor: pointer;
+  background-color: initial;
+  border: none;
+  outline: 0;
+}

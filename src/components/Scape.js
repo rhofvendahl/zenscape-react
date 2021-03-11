@@ -3,8 +3,8 @@ import Box from "./Box";
 
 const PALLETES = {
   WATER: {
-    light: "#4081f2",
-    medium: "#346dc7",
+    light: "#4081F2",
+    medium: "#346dC7",
     dark: "#275799",
   },
   SAND: {
@@ -13,9 +13,9 @@ const PALLETES = {
     dark: "#817847",
   },
   FOLIAGE: {
-    light: "#2aa330",
-    medium: "#1f8c28",
-    dark: "#106e1f",
+    light: "#2AA330",
+    medium: "#1F8C28",
+    dark: "#106E1F",
   },
   ROCK: {
     light: "#BEBEBE",
@@ -28,9 +28,12 @@ const PALLETES = {
     dark: "#7F7F7F",
   },
   BASE: {
-    light: "#9e9c9c",
-    medium: "#807f7e",
-    dark: "#4f4e4e",
+    // light: "#9e9c9c",
+    // medium: "#807f7e",
+    // dark: "#4f4e4e",
+    light: "#9D9D9D",
+    medium: "#7F7F7F",
+    dark: "#4E4E4E",
   },
 };
 
@@ -50,8 +53,7 @@ const getPallete = (height) => {
 };
 
 // Responsible for rendering landscape.
-// const Scape = (props) => {
-const Scape = ({scapeMap, cellSize, handleClick}) => {
+const Scape = ({scapeMap, cellSize, handleClick}) => { 
   const cells = [];
   for (let x = 0; x < scapeMap.length; x++) {
     for (let z = 0; z < scapeMap[0].length; z++) {

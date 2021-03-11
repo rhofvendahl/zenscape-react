@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+
+.app {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.viewport {
+  display: relative;
+  flex: 1;
+  height: 100%;
+}
+
+.guide-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.guide {
+  position: absolute;
+  bottom: 25vh;
+  width: 100%;
+  text-align: center;
+  font-family: "Macondo", cursive;
+  font-size: 2.8rem;
+  -webkit-animation: fadeAway 5s forwards;
+  animation: fadeAway 5s forwards;
+}
+
+@keyframes fadeAway {
+  0% {opacity: 1;}
+  80% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+@-webkit-keyframes fadeAway {
+  0% {opacity: 1;}
+  80% {opacity: 1;}
+  100% {opacity: 0;}
+}
