@@ -2,7 +2,7 @@
   "name": "zenscape-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://zenscape.us",
+  "homepage": "https://rhofvendahl.github.io/zenscape-react",
   "dependencies": {
     "rc-slider": "^9.7.1",
     "react": "^17.0.1",
