@@ -2,7 +2,6 @@
 
 .controls {
   position: relative;
-  /* background-color: #C7C3C0; */
   background-color: #C3C3C3;
   height: 100%;
   -webkit-animation: showControls 1s forwards;
