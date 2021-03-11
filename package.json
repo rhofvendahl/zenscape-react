@@ -2,7 +2,7 @@
   "name": "zenscape-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "zenscape.us",
+  "homepage": "https://zenscape.us",
   "dependencies": {
     "rc-slider": "^9.7.1",
     "react": "^17.0.1",
