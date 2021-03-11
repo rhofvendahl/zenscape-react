@@ -12,7 +12,6 @@
   position: absolute;
   width: 100%;
   top: 10vh;
-  bottom: 0;
 }
 
 .stripe-logo {
@@ -22,8 +21,6 @@
   background-color: #C3C3C3;
   font-size: 6rem;
   padding-top: .5rem;
-  border-top-left-radius: .5rem;
-  border-top-right-radius: .5rem;
   border-radius: .5rem;
 }
 
