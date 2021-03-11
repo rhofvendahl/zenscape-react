@@ -58,6 +58,12 @@ const Scape = ({scapeMap, cellSize, handleClick}) => {
   for (let x = 0; x < scapeMap.length; x++) {
     for (let z = 0; z < scapeMap[0].length; z++) {
       const boxName = x + "-" + z;
+      const roundCorners = {
+        backTopLeft: (x == 0 && z == 0) || scapeMap[x][z],
+        backTopRight: (x == scapeMap.length - 1 && z == 0) || scapeMap[x][z],
+        frontBottomLeft: (x == 0 && z == scapeMap[0].length - 1) || scapeMap[x][z],
+        frontBottomRight: (x == scapeMap.length - 1 && z == scapeMap[0].length - 1) || scapeMap[x][z],
+      };
       cells.push(<Box
         key={boxName}
         boxName={boxName}
@@ -73,6 +79,7 @@ const Scape = ({scapeMap, cellSize, handleClick}) => {
         }}
         handleClick={() => handleClick(boxName)}
         pallete={getPallete(scapeMap[x][z])}
+        roundCorners={roundCorners}
       />);
     }
   }
@@ -101,6 +108,12 @@ const Scape = ({scapeMap, cellSize, handleClick}) => {
           z: 0,
         }}
         pallete={PALLETES.BASE}
+        roundCorners={{
+            backTopLeft: true,
+            backTopRight: true,
+            frontBottomLeft: true,
+            frontBottomRight: true,    
+        }}
       />
     </div>
   );

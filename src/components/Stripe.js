@@ -3,13 +3,13 @@ import "./Stripe.css";
 
 const Stripe = (props) => {
   return (
-    <div
-      className="stripe"
-      onClick={() => props.toggleControls()}
-    >
+    <div className="stripe">
       <div className="stripe-contents">  
-        <div className="logo">ZS</div>
-        <button className="controls-toggle">[controls]</button>
+        <div className="stripe-logo">ZS</div>
+        <button
+          className="controls-toggle"
+          onClick={() => props.toggleControls()}
+        >[controls]</button>
       </div>
     </div>
   );

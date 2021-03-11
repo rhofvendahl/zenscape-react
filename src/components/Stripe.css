@@ -5,28 +5,32 @@
   height: 100%;
   width: 12rem;
   margin-left: 15%;
-  /* background-color: #DBD7D3; */
   background-color: #d8d8d8;
-  font-family: 'Macondo', cursive;
-  color: white;
-  text-align: center;
 }
 
 .stripe-contents {
   position: absolute;
   width: 100%;
   top: 10vh;
+  bottom: 0;
 }
 
-.logo {
-  /* background-color: #C7C3C0; */
-  background-color: #C3C3C3;
+.stripe-logo {
+  font-family: 'Macondo', cursive;
+  color: white;
   text-align: center;
+  background-color: #C3C3C3;
   font-size: 6rem;
   padding-top: .5rem;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+  border-radius: .5rem;
 }
 
 .controls-toggle {
+  font-family: 'Macondo', cursive;
+  color: white;
+  text-align: center;
   margin-top: .5rem;
   font-size: 2.3rem;
   cursor: pointer;
@@ -34,5 +38,5 @@
   border: none;
   outline: 0;
   color: white;
-  font-family: 'Macondo', cursive;
+  width: 100%;
 }

@@ -1,5 +1,5 @@
 // Constructs a box face.
-const Face = ({translate, rotate, width, height, backgroundColor}) => {
+const Face = ({translate, rotate, width, height, backgroundColor, borderRadius}) => {
   const transform = `translate3d(${translate.x}px, ${translate.y}px, ${translate.z}px)`
     + ` rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) rotateZ(${rotate.z}deg)`;
 
@@ -13,6 +13,7 @@ const Face = ({translate, rotate, width, height, backgroundColor}) => {
         marginTop: -height/2,
         transform,
         backgroundColor,
+        borderRadius,
       }}
     ></div>
   );
