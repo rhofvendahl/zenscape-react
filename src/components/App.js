@@ -15,6 +15,25 @@ const INIT = {
   WAVE_SPEED: 1,
 };
 
+const CONTROLS_LIMITS = {
+  SIZE: {
+    MIN: 10,
+    MAX: 40,
+  },
+  HEIGHT: {
+    MIN: .25,
+    MAX: 2,
+  },
+  WIDTH: {
+    MIN: .5,
+    MAX: 2,
+  },
+  SPEED: {
+    MIN: .1,
+    MAX: 10,
+  },
+}
+
 // Manages interactions between landscape and controls
 const App = () => {
   const [xCells, setXCells] = useState(INIT.X_CELLS);
@@ -25,11 +44,10 @@ const App = () => {
   const [waveHeight, setWaveHeight] = useState(INIT.WAVE_HEIGHT);
   const [waveWidth, setWaveWidth] = useState(INIT.WAVE_WIDTH);
   const [waveSpeed, setWaveSpeed] = useState(INIT.WAVE_SPEED);
-  
   const [controlsHidden, setControlsHidden] = useState(null);
-
   // Indicates whether controls "visibility" set to "none" (occurs at end of "hide" animation)
   const [controlsRemoved, setControlsRemoved] = useState(false);
+
 
   // Ensures timeout has current value for controlsHidden
   const controlsHiddenRef = useRef(controlsHidden);
@@ -71,7 +89,7 @@ const App = () => {
   useEffect(() => {
     toggleControlsRef.current = toggleControls;
   }, [toggleControls]);  
-
+  
   useEffect(() => {
     setTimeout(() => {
       if (controlsHiddenRef.current == null) {
@@ -89,40 +107,22 @@ const App = () => {
     setWaveSpeed(INIT.WAVE_SPEED);
   };
 
-  const minXCells = 10;
-  const maxXCells = 40;
-  const onSizeChange = (value) => {
-    const ratio = value / 100.0;
-    const newXCellsFloat = minXCells + (maxXCells-minXCells)*ratio;
-    setCellSize(Math.round(400 / newXCellsFloat));
-    setXCells(Math.round(newXCellsFloat));
-    setZCells(Math.round(newXCellsFloat));
+  const controlsHandlers = {
+    onSizeChange: (newXCellsFloat) => {
+      setCellSize(Math.round(400 / newXCellsFloat));
+      setXCells(Math.round(newXCellsFloat));
+      setZCells(Math.round(newXCellsFloat));
+    },
+    onHeightChange: (newHeight) => {
+      setWaveHeight(newHeight);
+    },
+    onWidthChange: (newWidth) => {
+      setWaveWidth(newWidth);
+    },
+    onSpeedChange: (newSpeed) => {
+      setWaveSpeed(newSpeed);
+    },
   };
-  const sizeValue = Math.round((xCells-minXCells) / (maxXCells-minXCells) * 100);
-
-  const minWaveHeight = .25;
-  const maxWaveHeight = 2;
-  const onHeightChange = (value) => {
-    const ratio = value / 100.0;
-    setWaveHeight(minWaveHeight + (maxWaveHeight-minWaveHeight)*ratio);
-  };
-  const waveHeightValue = Math.round((waveHeight-minWaveHeight) / (maxWaveHeight-minWaveHeight) * 100);
-
-  const minWaveWidth = .5;
-  const maxWaveWidth = 2;
-  const onWidthChange = (value) => {
-    const ratio = value / 100.0;
-    setWaveWidth(minWaveWidth + (maxWaveWidth-minWaveWidth)*ratio);
-  };
-  const waveWidthValue = Math.round((waveWidth-minWaveWidth) / (maxWaveWidth-minWaveWidth) * 100);
-
-  const minWaveSpeed = .1;
-  const maxWaveSpeed = 10;
-  const onSpeedChange = (value) => {
-    const ratio = value / 100.0;
-    setWaveSpeed(minWaveSpeed + (maxWaveSpeed-minWaveSpeed)*ratio);
-  };
-  const waveSpeedValue = Math.round((waveSpeed-minWaveSpeed) / (maxWaveSpeed-minWaveSpeed) * 100);
 
   return (
     <div className="app">
@@ -148,17 +148,15 @@ const App = () => {
       </div>
       <Controls
         className={getControlsClassName()}
-        onSizeChange={onSizeChange}
-        onHeightChange={onHeightChange}
-        onWidthChange={onWidthChange}
-        onSpeedChange={onSpeedChange}
-        sizeValue={sizeValue}
-        waveValues={{
-          height: waveHeightValue,
-          width: waveWidthValue,
-          speed: waveSpeedValue,
+        handlers={controlsHandlers}
+        values={{
+          size: xCells,
+          height: waveHeight,
+          width: waveWidth,
+          speed: waveSpeed,
         }}
-        resetControls={resetControls}
+        limits={CONTROLS_LIMITS}
+        reset={resetControls}
       />
     </div>
   );
