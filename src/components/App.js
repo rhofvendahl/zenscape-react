@@ -2,48 +2,19 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import Stripe from "./Stripe";
 import Controls from "./Controls";
 import ScapeManager from "./ScapeManager";
+import { INIT_VALUES } from "../constants"
 import "./App.css";
-
-const INIT = {
-  X_CELLS: 20,
-  Z_CELLS: 20,
-  CELL_SIZE: 20,
-  CLICK_MEMORY: 5,
-  UPDATE_INTERVAL: 100,
-  WAVE_HEIGHT: 1,
-  WAVE_WIDTH: 1,
-  WAVE_SPEED: 1,
-};
-
-const CONTROLS_LIMITS = {
-  SIZE: {
-    MIN: 10,
-    MAX: 40,
-  },
-  HEIGHT: {
-    MIN: .25,
-    MAX: 2,
-  },
-  WIDTH: {
-    MIN: .5,
-    MAX: 2,
-  },
-  SPEED: {
-    MIN: .1,
-    MAX: 10,
-  },
-}
 
 // Manages interactions between landscape and controls
 const App = () => {
-  const [xCells, setXCells] = useState(INIT.X_CELLS);
-  const [zCells, setZCells] = useState(INIT.Z_CELLS);
-  const [cellSize, setCellSize] = useState(INIT.CELL_SIZE);
-  const [clickMemory, setClickMemory] = useState(INIT.CLICK_MEMORY);
-  const [updateInterval, setUpdateInterval] = useState(INIT.UPDATE_INTERVAL);
-  const [waveHeight, setWaveHeight] = useState(INIT.WAVE_HEIGHT);
-  const [waveWidth, setWaveWidth] = useState(INIT.WAVE_WIDTH);
-  const [waveSpeed, setWaveSpeed] = useState(INIT.WAVE_SPEED);
+  const [xCells, setXCells] = useState(INIT_VALUES.X_CELLS);
+  const [zCells, setZCells] = useState(INIT_VALUES.Z_CELLS);
+  const [cellSize, setCellSize] = useState(INIT_VALUES.CELL_SIZE);
+  const [clickMemory, setClickMemory] = useState(INIT_VALUES.CLICK_MEMORY);
+  const [updateInterval, setUpdateInterval] = useState(INIT_VALUES.UPDATE_INTERVAL);
+  const [waveHeight, setWaveHeight] = useState(INIT_VALUES.WAVE_HEIGHT);
+  const [waveWidth, setWaveWidth] = useState(INIT_VALUES.WAVE_WIDTH);
+  const [waveSpeed, setWaveSpeed] = useState(INIT_VALUES.WAVE_SPEED);
   const [controlsHidden, setControlsHidden] = useState(null);
   // Indicates whether controls "visibility" set to "none" (occurs at end of "hide" animation)
   const [controlsRemoved, setControlsRemoved] = useState(false);
@@ -89,7 +60,7 @@ const App = () => {
   useEffect(() => {
     toggleControlsRef.current = toggleControls;
   }, [toggleControls]);  
-  
+
   useEffect(() => {
     setTimeout(() => {
       if (controlsHiddenRef.current == null) {
@@ -99,12 +70,12 @@ const App = () => {
   }, []);
 
   const resetControls = () => {
-    setXCells(INIT.X_CELLS);
-    setZCells(INIT.Z_CELLS);
-    setCellSize(INIT.CELL_SIZE);
-    setWaveHeight(INIT.WAVE_HEIGHT);
-    setWaveWidth(INIT.WAVE_WIDTH);
-    setWaveSpeed(INIT.WAVE_SPEED);
+    setXCells(INIT_VALUES.X_CELLS);
+    setZCells(INIT_VALUES.Z_CELLS);
+    setCellSize(INIT_VALUES.CELL_SIZE);
+    setWaveHeight(INIT_VALUES.WAVE_HEIGHT);
+    setWaveWidth(INIT_VALUES.WAVE_WIDTH);
+    setWaveSpeed(INIT_VALUES.WAVE_SPEED);
   };
 
   const controlsHandlers = {
@@ -155,7 +126,6 @@ const App = () => {
           width: waveWidth,
           speed: waveSpeed,
         }}
-        limits={CONTROLS_LIMITS}
         reset={resetControls}
       />
     </div>

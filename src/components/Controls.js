@@ -1,9 +1,10 @@
 import React from "react";
 import Slider from "rc-slider";
 import 'rc-slider/assets/index.css';
+import { CONTROLS_LIMITS as LIMITS } from "../constants"
 import "./Controls.css";
 
-const Controls = ({ className, handlers, values, limits, reset }) => {
+const Controls = ({ className, handlers, values, reset }) => {
   return (
     <div
       className={className}
@@ -15,8 +16,8 @@ const Controls = ({ className, handlers, values, limits, reset }) => {
             onChange={handlers.onSizeChange}
             value={values.size}
             step={.01}
-            min={limits.SIZE.MIN}
-            max={limits.SIZE.MAX}
+            min={LIMITS.SIZE.MIN}
+            max={LIMITS.SIZE.MAX}
           />
         </div>
         <div className="control control-height">
@@ -25,8 +26,8 @@ const Controls = ({ className, handlers, values, limits, reset }) => {
             onChange={handlers.onHeightChange}
             value={values.height}
             step={.01}
-            min={limits.HEIGHT.MIN}
-            max={limits.HEIGHT.MAX}
+            min={LIMITS.HEIGHT.MIN}
+            max={LIMITS.HEIGHT.MAX}
           />
         </div>
         <div className="control control-width">
@@ -35,8 +36,8 @@ const Controls = ({ className, handlers, values, limits, reset }) => {
             onChange={handlers.onWidthChange}
             value={values.width}
             step={.01}
-            min={limits.WIDTH.MIN}
-            max={limits.WIDTH.MAX}
+            min={LIMITS.WIDTH.MIN}
+            max={LIMITS.WIDTH.MAX}
           />
         </div>
         <div className="control control-speed">
@@ -45,8 +46,8 @@ const Controls = ({ className, handlers, values, limits, reset }) => {
             onChange={handlers.onSpeedChange}
             value={values.speed}
             step={.01}
-            min={limits.SPEED.MIN}
-            max={limits.SPEED.MAX}
+            min={LIMITS.SPEED.MIN}
+            max={LIMITS.SPEED.MAX}
           />
         </div>
         <div className="controls-reset"
