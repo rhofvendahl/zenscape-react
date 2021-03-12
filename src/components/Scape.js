@@ -1,41 +1,6 @@
 import React from "react";
+import { SCAPE_PALLETES as PALLETES } from "../constants.js";
 import Box from "./Box";
-
-const PALLETES = {
-  WATER: {
-    light: "#4081F2",
-    medium: "#346dC7",
-    dark: "#275799",
-  },
-  SAND: {
-    light: "#FFF089",
-    medium: "#C1B367",
-    dark: "#817847",
-  },
-  FOLIAGE: {
-    light: "#2AA330",
-    medium: "#1F8C28",
-    dark: "#106E1F",
-  },
-  ROCK: {
-    light: "#BEBEBE",
-    medium: "#8E8E8E",
-    dark: "#606060",
-  },
-  SNOW: {
-    light: "#FFFFFF",
-    medium: "#BEBEBE",
-    dark: "#7F7F7F",
-  },
-  BASE: {
-    // light: "#9e9c9c",
-    // medium: "#807f7e",
-    // dark: "#4f4e4e",
-    light: "#9D9D9D",
-    medium: "#7F7F7F",
-    dark: "#4E4E4E",
-  },
-};
 
 const getPallete = (height) => {
   const snowLine = 3;

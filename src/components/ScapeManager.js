@@ -3,7 +3,7 @@ import Scape from "./Scape";
 import "./ScapeManager.css";
 
 // Responsible for landscape interactivity.
-const ScapeManager = ({xCells, zCells, cellSize, clickMemory, updateInterval, wave }) => {
+const ScapeManager = ({xCells, zCells, cellSize, clickMemory, updateInterval, waveValues}) => {
   const [clickLog, setClickLog] = useState([
     [5, 6, Date.now()],
     [5, 6, Date.now()],
@@ -41,15 +41,15 @@ const ScapeManager = ({xCells, zCells, cellSize, clickMemory, updateInterval, wa
           // If the current click is both close enough and recent enough, add an amount to the cell's height
           // corresponding to its position on a 2D cosine curve which started out centered on the clicked
           // cell and has since moved toward (and past) the current cell.
-          const distanceFromPeak = Math.abs(distance / 2 - (seconds * wave.speed)) / wave.width;
+          const distanceFromPeak = Math.abs(distance / 2 - (seconds * waveValues.speed)) / waveValues.width;
           if (distanceFromPeak < Math.PI) {
-            newScapeMap[x][z] += (Math.cos(distanceFromPeak) + 1) / 2 * wave.height;
+            newScapeMap[x][z] += (Math.cos(distanceFromPeak) + 1) / 2 * waveValues.height;
           }
         };
       };
     };
     setScapeMap(newScapeMap);
-  }, [clickMemory, clickLog, xCells, zCells, wave]);
+  }, [clickMemory, clickLog, xCells, zCells, waveValues]);
 
   // Create a reference to updateScapeMap that can be used within setInterval.
   const updateScapeMapRef = useRef(updateScapeMap);

@@ -59,6 +59,7 @@ const App = () => {
     toggleControlsRef.current = toggleControls;
   }, [toggleControls]);  
 
+  // Hides controls 2seconds after start of session (if they havne't already been hidden)
   useEffect(() => {
     setTimeout(() => {
       if (controlsHiddenRef.current == null) {
@@ -105,7 +106,7 @@ const App = () => {
           cellSize={cellSize}
           clickMemory={INIT_VALUES.CLICK_MEMORY}
           updateInterval={INIT_VALUES.UPDATE_INTERVAL}
-          wave={{
+          waveValues={{
             height: waveHeight,
             width: waveWidth,
             speed: waveSpeed,
