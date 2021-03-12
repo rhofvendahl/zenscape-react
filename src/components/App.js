@@ -10,13 +10,11 @@ const App = () => {
   const [xCells, setXCells] = useState(INIT_VALUES.X_CELLS);
   const [zCells, setZCells] = useState(INIT_VALUES.Z_CELLS);
   const [cellSize, setCellSize] = useState(INIT_VALUES.CELL_SIZE);
-  const [clickMemory, setClickMemory] = useState(INIT_VALUES.CLICK_MEMORY);
-  const [updateInterval, setUpdateInterval] = useState(INIT_VALUES.UPDATE_INTERVAL);
   const [waveHeight, setWaveHeight] = useState(INIT_VALUES.WAVE_HEIGHT);
   const [waveWidth, setWaveWidth] = useState(INIT_VALUES.WAVE_WIDTH);
   const [waveSpeed, setWaveSpeed] = useState(INIT_VALUES.WAVE_SPEED);
   const [controlsHidden, setControlsHidden] = useState(null);
-  // Indicates whether controls "visibility" set to "none" (occurs at end of "hide" animation)
+  // Indicates whether controls "visibility" is set to "none" (occurs at end of "hide" animation)
   const [controlsRemoved, setControlsRemoved] = useState(false);
 
 
@@ -105,8 +103,8 @@ const App = () => {
           xCells={xCells}
           zCells={zCells}
           cellSize={cellSize}
-          clickMemory={clickMemory}
-          updateInterval={updateInterval}
+          clickMemory={INIT_VALUES.CLICK_MEMORY}
+          updateInterval={INIT_VALUES.UPDATE_INTERVAL}
           wave={{
             height: waveHeight,
             width: waveWidth,
