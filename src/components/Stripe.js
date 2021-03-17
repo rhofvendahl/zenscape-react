@@ -1,5 +1,5 @@
 import React from "react";
-import "./Stripe.css";
+import "../styles/Stripe.css";
 
 const Stripe = ({toggleControls}) => {
   return (

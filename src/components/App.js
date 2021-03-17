@@ -3,7 +3,7 @@ import Stripe from "./Stripe";
 import Controls from "./Controls";
 import ScapeManager from "./ScapeManager";
 import { INIT_VALUES } from "../constants"
-import "./App.css";
+import "../styles/App.css";
 
 // Manages interactions between landscape and controls
 const App = () => {
@@ -16,7 +16,6 @@ const App = () => {
   const [controlsHidden, setControlsHidden] = useState(null);
   // Indicates whether controls "visibility" is set to "none" (occurs at end of "hide" animation)
   const [controlsRemoved, setControlsRemoved] = useState(false);
-
 
   // Ensures timeout has current value for controlsHidden
   const controlsHiddenRef = useRef(controlsHidden);

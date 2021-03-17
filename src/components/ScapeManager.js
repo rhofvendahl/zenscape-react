@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import Scape from "./Scape";
-import "./ScapeManager.css";
+import "../styles/ScapeManager.css";
 
 // Responsible for landscape interactivity.
 const ScapeManager = ({xCells, zCells, cellSize, clickMemory, updateInterval, waveValues}) => {

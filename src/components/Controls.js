@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "rc-slider";
 import 'rc-slider/assets/index.css';
 import { CONTROLS_LIMITS as LIMITS } from "../constants"
-import "./Controls.css";
+import "../styles/Controls.css";
 
 const Controls = ({ className, handlers, values, reset }) => {
   return (
