@@ -5,7 +5,7 @@ const Face = ({translate, rotate, width, height, backgroundColor, borderRadius})
 
   return (
     <div
-      className="face object"
+      className='face object'
       style={{
         width,
         height,
@@ -13,7 +13,7 @@ const Face = ({translate, rotate, width, height, backgroundColor, borderRadius})
         marginTop: -height/2,
         transform,
         backgroundColor,
-        borderRadius,
+        borderRadius
       }}
     ></div>
   );

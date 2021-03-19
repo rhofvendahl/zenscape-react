@@ -1,13 +1,13 @@
-import React from "react";
-import "../styles/Stripe.css";
+import React from 'react';
+import '../styles/Stripe.css';
 
 const Stripe = ({toggleControls}) => {
   return (
-    <div className="stripe">
-      <div className="stripe-contents">  
-        <div className="stripe-logo">ZS</div>
+    <div className='stripe'>
+      <div className='stripe-contents'>  
+        <div className='stripe-logo'>ZS</div>
         <button
-          className="controls-toggle"
+          className='controls-toggle'
           onClick={() => toggleControls()}
         >[controls]</button>
       </div>

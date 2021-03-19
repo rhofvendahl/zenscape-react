@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import Scape from "./Scape";
-import "../styles/ScapeManager.css";
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import Scape from './Scape';
+import '../styles/ScapeManager.css';
 
 // Responsible for landscape interactivity.
 const ScapeManager = ({xCells, zCells, cellSize, clickMemory, updateInterval, waveValues}) => {
@@ -8,7 +8,7 @@ const ScapeManager = ({xCells, zCells, cellSize, clickMemory, updateInterval, wa
     [5, 6, Date.now()],
     [5, 6, Date.now()],
     [14, 14, Date.now() + 500],
-    [16, 4, Date.now() + 1000],
+    [16, 4, Date.now() + 1000]
   ]);
 
   const [scapeMap, setScapeMap] = useState(
@@ -17,9 +17,9 @@ const ScapeManager = ({xCells, zCells, cellSize, clickMemory, updateInterval, wa
 
   const handleClick = (boxName) => {
     const click = [
-      parseInt(boxName.split("-")[0]),
-      parseInt(boxName.split("-")[1]),
-      Date.now(),
+      parseInt(boxName.split('-')[0]),
+      parseInt(boxName.split('-')[1]),
+      Date.now()
     ];
     setClickLog(clickLog.concat([click]));
   }
@@ -71,7 +71,7 @@ const ScapeManager = ({xCells, zCells, cellSize, clickMemory, updateInterval, wa
 
 
   return (
-    <div className="scape-manager" >
+    <div className='scape-manager' >
       <Scape
         cellSize={cellSize}
         handleClick={(boxName) => handleClick(boxName)}

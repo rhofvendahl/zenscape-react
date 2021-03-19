@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import Stripe from "./Stripe";
-import Controls from "./Controls";
-import ScapeManager from "./ScapeManager";
-import { INIT_VALUES } from "../constants"
-import "../styles/App.css";
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import Stripe from './Stripe';
+import Controls from './Controls';
+import ScapeManager from './ScapeManager';
+import { INIT_VALUES } from '../constants'
+import '../styles/App.css';
 
 // Manages interactions between landscape and controls
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
   const [waveWidth, setWaveWidth] = useState(INIT_VALUES.WAVE_WIDTH);
   const [waveSpeed, setWaveSpeed] = useState(INIT_VALUES.WAVE_SPEED);
   const [controlsHidden, setControlsHidden] = useState(null);
-  // Indicates whether controls "visibility" is set to "none" (occurs at end of "hide" animation)
+  // Indicates whether controls 'visibility' is set to 'none' (occurs at end of 'hide' animation)
   const [controlsRemoved, setControlsRemoved] = useState(false);
 
   // Ensures timeout has current value for controlsHidden
@@ -40,13 +40,13 @@ const App = () => {
   }, [controlsHidden]);
 
   const getControlsClassName = () => {
-    let className = "controls";
+    let className = 'controls';
     if (controlsRemoved) {
-      return className + " controls-removed";
+      return className + ' controls-removed';
     } else if (controlsHidden == null) {
-      return className + " controls-initial";
+      return className + ' controls-initial';
     } else if (controlsHidden) {
-      return className + " controls-hidden";
+      return className + ' controls-hidden';
     } else {
       return className;
     }
@@ -94,8 +94,8 @@ const App = () => {
   };
 
   return (
-    <div className="app">
-      <div className="viewport">
+    <div className='app'>
+      <div className='viewport'>
         <Stripe
           toggleControls={toggleControls}
         />
@@ -108,11 +108,11 @@ const App = () => {
           waveValues={{
             height: waveHeight,
             width: waveWidth,
-            speed: waveSpeed,
+            speed: waveSpeed
           }}
         />
-        <div className="guide-wrapper">
-          <div className="guide">^ click scape ^</div>
+        <div className='guide-wrapper'>
+          <div className='guide'>^ click scape ^</div>
         </div>
       </div>
       <Controls
@@ -122,7 +122,7 @@ const App = () => {
           size: xCells,
           height: waveHeight,
           width: waveWidth,
-          speed: waveSpeed,
+          speed: waveSpeed
         }}
         reset={resetControls}
       />

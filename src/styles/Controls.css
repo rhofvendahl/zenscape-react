@@ -68,7 +68,7 @@
 .control-label {
   text-align: center;
   font-size: 1.8rem;
-  font-family: "Macondo", cursive;
+  font-family: 'Macondo', cursive;
   color: white;
   margin-bottom: .75rem;
 }
@@ -76,7 +76,7 @@
 .controls-reset {
   text-align: center;
   font-size: 1.8rem;
-  font-family: "Macondo", cursive;
+  font-family: 'Macondo', cursive;
   color: white;
   margin-top: 5rem;
   cursor: pointer;
